@@ -15,7 +15,7 @@ public class Tranzakcio {
 
     private static double trKoltseg = 0.05;
 
-    private static tipus tipus; //miért static
+    private static tipus tipus; 
     private String inditoNev;
     private int pillEgyenleg;
     private int ujEgyenleg;
@@ -41,19 +41,17 @@ public class Tranzakcio {
                 szamla.addTortenet(tr);
                 System.out.println(tr);                                                     // ellenőrzés miatt
                 szamla.setEgyenleg(tr.ujEgyenleg);
-                System.out.println("");                                                     // ellenőrzés miatt
+                
             } else {
 //                throw new IllegalArgumentException("Negatív összeggel nem lehet betétet indítani!");
                 System.out.println("Negatív összeggel nem lehet betétet indítani!");        // ellenőrzés miatt
-                System.out.println("");                                                     // ellenőrzés miatt
 
             }
         } else {
 //            throw new IllegalArgumentException("Csak számlatulajdonos indíthat tranzakciót!");
             System.out.println("Csak számlatulajdonos indíthat tranzakciót!");              // ellenőrzés miatt
-            System.out.println("");// ellenőrzés miatt
         }
-
+        System.out.println("");                                                             // ellenőrzés miatt
     }
 
     public static void kivet(BankSzamla szamla, int osszeg, String nev) {
@@ -81,7 +79,7 @@ public class Tranzakcio {
 //            throw new IllegalArgumentException("Csak számlatulajdonos indíthat tranzakciót!");
             System.out.println("Csak számlatulajdonos indíthat tranzakciót!");                  // ellenőrzés miatt
         }
-        System.out.println("");                                                             // ellenőrzés miatt
+        System.out.println("");                                                                 // ellenőrzés miatt
     }
 
     public static int tranzakcioDij(int osszeg) {

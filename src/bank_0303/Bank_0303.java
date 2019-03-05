@@ -64,6 +64,8 @@ public class Bank_0303 {
         szamla1.tulajdonosTorol("Béla");
         System.out.println(szamla1);
 
+        
+        
     }
 
 }

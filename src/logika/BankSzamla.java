@@ -51,14 +51,14 @@ public class BankSzamla {
     }
 
     public void tulajdonosHozzaad(String nev) {
-        System.out.println("Tulajdonos hozzáad " + nev);
+        System.out.println("Tulajdonos hozzáad " + nev);        // ellenőrzés miatt
         if (tulajdonosLista.size() < MAX_TULAJDONOS) {
             tulajdonosLista.add(nev);
         }
     }
 
     public void tulajdonosTorol(String nev) {
-        System.out.println("Tulajdonos töröl " + nev);
+        System.out.println("Tulajdonos töröl " + nev);          // ellenőrzés miatt
         if (tulajdonosLista.contains(nev)
                 && tulajdonosLista.size() > 1) {
             boolean talalat = false;
