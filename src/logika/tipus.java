@@ -10,7 +10,7 @@ package logika;
  *
  * @author FZs
  */
-public enum TranzakcioTípus {
+public enum tipus {
     BETET,
     KIVET
             
