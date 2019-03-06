@@ -11,7 +11,7 @@ package logika;
  * @author FZs
  */
 public enum tipus {
-    BETET,
-    KIVET
+    HUF_ATUTALAS,
+    JOVAIRAS
             
 }

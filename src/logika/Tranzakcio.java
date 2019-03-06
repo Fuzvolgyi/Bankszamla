@@ -5,6 +5,7 @@
  */
 package logika;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -13,17 +14,22 @@ import java.util.ArrayList;
  */
 public class Tranzakcio {
 
-    private static double trKoltseg = 0.05;
-    private static tipus tipus; 
-    private String inditoNev;
+    
+    private int id;
+    private tipus tipus; 
+    private String inditoSzemely;
     private int pillEgyenleg;
     private int ujEgyenleg;
+    private double trKoltseg;
+    private double illetek = 0.003;
     private int koltseg;
     private int osszeg;
+    private LocalDate inditas;
+    private LocalDate konyveles;
 
     public Tranzakcio(BankSzamla szamla, tipus tipus, String inditoNev, int osszeg) {
         this.tipus = tipus;
-        this.inditoNev = inditoNev;
+        this.inditoSzemely = inditoNev;
         this.pillEgyenleg = szamla.getEgyenleg();
         this.ujEgyenleg = ujEgyenleg(szamla, osszeg, tipus);
         this.koltseg = tranzakcioDij(osszeg);
@@ -39,14 +45,39 @@ public class Tranzakcio {
         return tr.tipus;
     }
     
-        
-    
-    public static void betet(BankSzamla szamla, int osszeg, String nev) {
-        System.out.println("Indított tranzakció típusa: " + tipus.BETET
+    public void tranzakcioIndit(BankSzamla szamla, int osszeg, String nev, tipus tipus) {
+        System.out.println("Indított tranzakció típusa: " + tipus.HUF_ATUTALAS
                 + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
         if (szamla.getTulajdonosok().contains(nev)) {
             if (osszeg > 0) {
-                Tranzakcio tr = new Tranzakcio(szamla, tipus.BETET, nev, osszeg);
+                Tranzakcio tr = new Tranzakcio(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
+                szamla.addTortenet(tr);
+                System.out.println(tr);                                                     // ellenőrzés miatt
+                szamla.setEgyenleg(tr.ujEgyenleg);
+                
+            } else {
+//                throw new IllegalArgumentException("Negatív összeggel nem lehet betétet indítani!");
+                System.out.println("Negatív összeggel nem lehet betétet indítani!");        // ellenőrzés miatt
+
+            }
+        } else {
+//            throw new IllegalArgumentException("Csak számlatulajdonos indíthat tranzakciót!");
+            System.out.println("Csak számlatulajdonos indíthat tranzakciót!");              // ellenőrzés miatt
+        }
+        System.out.println("");                                                             // ellenőrzés miatt
+    }
+    
+    
+    
+    
+        
+    
+    public static void betet(BankSzamla szamla, int osszeg, String nev) {
+        System.out.println("Indított tranzakció típusa: " + tipus.HUF_ATUTALAS
+                + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
+        if (szamla.getTulajdonosok().contains(nev)) {
+            if (osszeg > 0) {
+                Tranzakcio tr = new Tranzakcio(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
                 szamla.addTortenet(tr);
                 System.out.println(tr);                                                     // ellenőrzés miatt
                 szamla.setEgyenleg(tr.ujEgyenleg);
@@ -64,13 +95,13 @@ public class Tranzakcio {
     }
 
     public static void kivet(BankSzamla szamla, int osszeg, String nev) {
-        System.out.println("Indított tranzakció típusa: " + tipus.KIVET
+        System.out.println("Indított tranzakció típusa: " + tipus.JOVAIRAS
                 + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
         if (szamla.getTulajdonosok().contains(nev)) {
 
             if (osszeg > 0) {
                 if (szamla.getEgyenleg() - osszeg - tranzakcioDij(osszeg) > 0) {
-                    Tranzakcio tr = new Tranzakcio(szamla, tipus.KIVET, nev, osszeg);
+                    Tranzakcio tr = new Tranzakcio(szamla, tipus.JOVAIRAS, nev, osszeg);
                     szamla.addTortenet(tr);
                     System.out.println(tr);                                                     // ellenőrzés miatt
                     szamla.setEgyenleg(tr.ujEgyenleg);
@@ -97,7 +128,7 @@ public class Tranzakcio {
     }
 
     public static int ujEgyenleg(BankSzamla szamla, int osszeg, tipus tipus) {
-        if (tipus == tipus.BETET) {
+        if (tipus == tipus.HUF_ATUTALAS) {
             int eredmeny = szamla.getEgyenleg() + osszeg - tranzakcioDij(osszeg);
             return eredmeny;
         } else {
@@ -108,7 +139,7 @@ public class Tranzakcio {
 
     @Override
     public String toString() {
-        return "Tranzakció típusa: " + getTipus(this) + ", Indító neve= " + inditoNev
+        return "Tranzakció típusa: " + getTipus(this) + ", Indító neve= " + inditoSzemely
                 + ", Régi egyenleg= " + pillEgyenleg + " " 
                 +  getTipus(this) + " összege: " + osszeg
                 + ", Tranzakciós költség= " + koltseg
