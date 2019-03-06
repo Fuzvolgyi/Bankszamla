@@ -12,44 +12,46 @@
 package logika;
 
 import java.util.ArrayList;
+import jdk.internal.dynalink.DefaultBootstrapper;
 
 public class BankSzamla {
 
     private final int MAX_TULAJDONOS = 3;
     private ArrayList<String> tulajdonosLista;
     private int egyenleg;
-
-    private ArrayList<Tranzakcio> tortenet;
+    private ArrayList<Tranzakcio> trTortenet;
 
     public BankSzamla(String tulajdonos) {
         tulajdonosLista = new ArrayList<>();
         this.tulajdonosLista.add(tulajdonos);
         this.egyenleg = 0;
-        tortenet = new ArrayList<>();
+        trTortenet = new ArrayList<>();
 
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Getter-Setter">
     public ArrayList<String> getTulajdonosok() {
         return tulajdonosLista;
     }
-
+    
     public int getEgyenleg() {
         int eredmeny = egyenleg;
         return eredmeny;
     }
-
+    
     public void setEgyenleg(int egyenleg) {
         this.egyenleg = egyenleg;
     }
+    
+    public ArrayList<Tranzakcio> getTortenet() {
+        return trTortenet;
+    }
+//</editor-fold>
 
     public void addTortenet(Tranzakcio peldany) {
-        this.tortenet.add(peldany);
+        this.trTortenet.add(peldany);
     }
-
-    public ArrayList<Tranzakcio> getTortenet() {
-        return tortenet;
-    }
-
+    
     public void tulajdonosHozzaad(String nev) {
         System.out.println("Tulajdonos hozzáad " + nev);        // ellenőrzés miatt
         if (tulajdonosLista.size() < MAX_TULAJDONOS) {
@@ -79,4 +81,19 @@ public class BankSzamla {
         return "BankSzamla{" + "tulajdonosok=" + tulajdonosLista + ", egyenleg=" + egyenleg + '}';
     }
 
+    public void trTortenetKiir(BankSzamla szamla){
+        System.out.println("");
+        System.out.println("A bankszámla összes tranzakció listája:");
+        for (int i = 0; i < szamla.trTortenet.size(); i++) {
+            System.out.println(szamla.trTortenet.get(i));
+        }
+    }
+    
+    public void osszKoltseg(BankSzamla szamla){
+        int eredmeny = 0;
+        for (int i = 0; i < szamla.trTortenet.size(); i++) {
+            eredmeny += szamla.trTortenet.get(i).getKoltseg(trTortenet.get(i));
+            }
+        System.out.println("Az összes tranzakció költsége: " + eredmeny + " Ft");
+    }    
 }

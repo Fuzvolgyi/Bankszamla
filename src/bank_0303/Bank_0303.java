@@ -52,6 +52,8 @@ public class Bank_0303 {
         szamla1.tulajdonosHozzaad("Juli");
         System.out.println(szamla1);
         System.out.println("");
+        
+        Tranzakcio.betet(szamla1, 70, "Juli");
 
         szamla1.tulajdonosTorol("Géza");
         System.out.println(szamla1);
@@ -60,12 +62,17 @@ public class Bank_0303 {
         szamla1.tulajdonosTorol("Juli");
         System.out.println(szamla1);
         System.out.println("");
+        
+        Tranzakcio.betet(szamla1, 70, "Juli");
 
         szamla1.tulajdonosTorol("Béla");
         System.out.println(szamla1);
 
+        szamla1.trTortenetKiir(szamla1);
         
-        
+        System.out.println("");
+
+        szamla1.osszKoltseg(szamla1);
     }
 
 }

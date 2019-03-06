@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class Tranzakcio {
 
     private static double trKoltseg = 0.05;
-
     private static tipus tipus; 
     private String inditoNev;
     private int pillEgyenleg;
@@ -32,6 +31,16 @@ public class Tranzakcio {
 
     }
 
+    public int getKoltseg(Tranzakcio tr) {
+        return tr.koltseg;
+    }
+
+    public tipus getTipus(Tranzakcio tr) {
+        return tr.tipus;
+    }
+    
+        
+    
     public static void betet(BankSzamla szamla, int osszeg, String nev) {
         System.out.println("Indított tranzakció típusa: " + tipus.BETET
                 + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
@@ -99,8 +108,9 @@ public class Tranzakcio {
 
     @Override
     public String toString() {
-        return "Tranzakció típusa: " + tipus + ", Indító neve= " + inditoNev
-                + ", Régi egyenleg= " + pillEgyenleg + " Betét összege: " + osszeg
+        return "Tranzakció típusa: " + getTipus(this) + ", Indító neve= " + inditoNev
+                + ", Régi egyenleg= " + pillEgyenleg + " " 
+                +  getTipus(this) + " összege: " + osszeg
                 + ", Tranzakciós költség= " + koltseg
                 + ", Új egyenleg: " + ujEgyenleg + '}';
     }
