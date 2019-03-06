@@ -12,14 +12,13 @@
 package logika;
 
 import java.util.ArrayList;
-import jdk.internal.dynalink.DefaultBootstrapper;
 
 public class BankSzamla {
 
     private final int MAX_TULAJDONOS = 3;
     private ArrayList<String> tulajdonosLista;
     private int egyenleg;
-    private ArrayList<Tranzakcio> trTortenet;
+    private ArrayList<Tranzakcio2> trTortenet;
 
     public BankSzamla(String tulajdonos) {
         tulajdonosLista = new ArrayList<>();
@@ -43,12 +42,12 @@ public class BankSzamla {
         this.egyenleg = egyenleg;
     }
     
-    public ArrayList<Tranzakcio> getTortenet() {
+    public ArrayList<Tranzakcio2> getTortenet() {
         return trTortenet;
     }
 //</editor-fold>
 
-    public void addTortenet(Tranzakcio peldany) {
+    public void addTortenet(Tranzakcio2 peldany) {
         this.trTortenet.add(peldany);
     }
     

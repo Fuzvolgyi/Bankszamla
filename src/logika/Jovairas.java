@@ -9,7 +9,7 @@ package logika;
  *
  * @author FZs
  */
-public class Jovairas extends Tranzakcio {
+public class Jovairas extends Tranzakcio2 {
 
     public Jovairas(BankSzamla szamla, logika.tipus tipus, String inditoNev, int osszeg) {
         super(szamla, tipus, inditoNev, osszeg);
@@ -21,7 +21,7 @@ public class Jovairas extends Tranzakcio {
                 + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
         if (szamla.getTulajdonosok().contains(nev)) {
             if (osszeg > 0) {
-                Tranzakcio tr = new Tranzakcio(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
+                Tranzakcio2 tr = new Tranzakcio2(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
                 szamla.addTortenet(tr);
                 System.out.println(tr);                                                     // ellenőrzés miatt
                 szamla.setEgyenleg(tr.ujEgyenleg);

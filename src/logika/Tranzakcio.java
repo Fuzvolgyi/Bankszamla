@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author FZs
  */
-public class Tranzakcio {
+public abstract class Tranzakcio2 {
 
     
     private int id;
@@ -27,7 +27,7 @@ public class Tranzakcio {
     private LocalDate inditas;
     private LocalDate konyveles;
 
-    public Tranzakcio(BankSzamla szamla, tipus tipus, String inditoNev, int osszeg) {
+    public Tranzakcio2(BankSzamla szamla, tipus tipus, String inditoNev, int osszeg) {
         this.tipus = tipus;
         this.inditoSzemely = inditoNev;
         this.pillEgyenleg = szamla.getEgyenleg();
@@ -37,11 +37,11 @@ public class Tranzakcio {
 
     }
 
-    public int getKoltseg(Tranzakcio tr) {
+    public int getKoltseg(Tranzakcio2 tr) {
         return tr.koltseg;
     }
 
-    public tipus getTipus(Tranzakcio tr) {
+    public tipus getTipus(Tranzakcio2 tr) {
         return tr.tipus;
     }
     
@@ -50,7 +50,7 @@ public class Tranzakcio {
                 + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
         if (szamla.getTulajdonosok().contains(nev)) {
             if (osszeg > 0) {
-                Tranzakcio tr = new Tranzakcio(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
+                Tranzakcio2 tr = new Tranzakcio2(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
                 szamla.addTortenet(tr);
                 System.out.println(tr);                                                     // ellenőrzés miatt
                 szamla.setEgyenleg(tr.ujEgyenleg);
@@ -77,7 +77,7 @@ public class Tranzakcio {
                 + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
         if (szamla.getTulajdonosok().contains(nev)) {
             if (osszeg > 0) {
-                Tranzakcio tr = new Tranzakcio(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
+                Tranzakcio2 tr = new Tranzakcio2(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
                 szamla.addTortenet(tr);
                 System.out.println(tr);                                                     // ellenőrzés miatt
                 szamla.setEgyenleg(tr.ujEgyenleg);
@@ -101,7 +101,7 @@ public class Tranzakcio {
 
             if (osszeg > 0) {
                 if (szamla.getEgyenleg() - osszeg - tranzakcioDij(osszeg) > 0) {
-                    Tranzakcio tr = new Tranzakcio(szamla, tipus.JOVAIRAS, nev, osszeg);
+                    Tranzakcio2 tr = new Tranzakcio2(szamla, tipus.JOVAIRAS, nev, osszeg);
                     szamla.addTortenet(tr);
                     System.out.println(tr);                                                     // ellenőrzés miatt
                     szamla.setEgyenleg(tr.ujEgyenleg);
