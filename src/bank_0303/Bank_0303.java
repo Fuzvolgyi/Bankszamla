@@ -12,8 +12,8 @@
 package bank_0303;
 
 import Szamla.BankSzamla;
-import Tranzakcio.HufAtutalas;
-import Tranzakcio.Megbizas;
+import Megbizas.Megbizas;
+import Tranzakcio.Tranzakcio;
 import Tranzakcio.tipus;
 
 /**
@@ -26,70 +26,66 @@ public class Bank_0303 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         // Teszt
+               
         
         BankSzamla szamla1 = new BankSzamla("Béla");
 
         System.out.println("Alaphelyzet: " + szamla1);
         System.out.println("");
+
+        teszt("Béla", 100, tipus.HUF_ATUTALAS, szamla1);
         
-        HufAtutalas megbizas = new HufAtutalas("Béla", 100);
-        System.out.println(megbizas);
-        megbizas.utalasIndit(megbizas, szamla1);
+        teszt("Béla", 50, tipus.JOVAIRAS, szamla1);
         
+
+
+
+        // Tulajdonoskezelés ellenőrzés
+        szamla1.tulajdonosHozzaad("Géza");
         System.out.println(szamla1);
-        
-        // betét ellenőrzés
-//        Megbizas.betet(szamla1, 150, "Béla");
-//
-//        Megbizas.betet(szamla1, -150, "Béla");
-//
-//        Megbizas.betet(szamla1, 70, "Juli");
-//
-//        // kivét ellenőrzés
-//        Megbizas.kivet(szamla1, 50, "Bela");
-//
-//        Megbizas.kivet(szamla1, 50, "Béla");
-//
-//        Megbizas.kivet(szamla1, -50, "Béla");
-//
-//        // Tulajdonoskezelés ellenőrzés
-//        szamla1.tulajdonosHozzaad("Géza");
-//        System.out.println(szamla1);
-//        System.out.println("");
-//
-//        szamla1.tulajdonosHozzaad("Juli");
-//        System.out.println(szamla1);
-//        System.out.println("");
-//        
-//        Megbizas.betet(szamla1, 70, "Juli");
-//
-//        szamla1.tulajdonosTorol("Géza");
-//        System.out.println(szamla1);
-//        System.out.println("");
-//
-//        szamla1.tulajdonosTorol("Juli");
-//        System.out.println(szamla1);
-//        System.out.println("");
-//        
-//        Megbizas.betet(szamla1, 70, "Juli");
-//
-//        szamla1.tulajdonosTorol("Béla");
-//        System.out.println(szamla1);
-//
-        szamla1.trTortenetKiir(szamla1);
-        
         System.out.println("");
 
-//        szamla1.osszKoltseg(szamla1);
+        szamla1.tulajdonosHozzaad("Juli");
+        System.out.println(szamla1);
+        System.out.println("");
         
         
-    
+
+        szamla1.tulajdonosTorol("Géza");
+        System.out.println(szamla1);
+        System.out.println("");
+
+        szamla1.tulajdonosTorol("Juli");
+        System.out.println(szamla1);
+        System.out.println("");
         
-    
-    
-}
-    
-    
-    
+        
+
+        szamla1.tulajdonosTorol("Béla");
+        System.out.println(szamla1);
+
+        szamla1.trTortenetKiir(szamla1);
+
+        System.out.println("");
+
+        szamla1.osszKoltseg(szamla1);
+    }
+
+    private static void megbizasInditas(String nev, int szam, tipus tipus) {
+        Megbizas megbizas = new Megbizas(nev, szam, tipus);
+        System.out.println(megbizas);
+    }
+
+    private static void teszt(String nev, int szam, tipus tipus, BankSzamla szamla1) {
+        Megbizas megbizas = new Megbizas("Béla", szam, tipus);
+        System.out.println(megbizas);
+        Tranzakcio tr = new Tranzakcio();
+        tr.tranzakcioIndit(megbizas, szamla1);
+        System.out.println(megbizas);
+        System.out.println(szamla1);
+        System.out.println("");
+    }
+
 }

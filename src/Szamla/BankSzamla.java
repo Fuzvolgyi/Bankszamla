@@ -11,7 +11,7 @@
  */
 package Szamla;
 
-import Tranzakcio.Megbizas;
+import Megbizas.Megbizas;
 import java.util.ArrayList;
 
 public class BankSzamla {
@@ -30,6 +30,9 @@ public class BankSzamla {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getter-Setter">
+    
+    
+    
     public ArrayList<String> getTulajdonosok() {
         return tulajdonosLista;
     }
@@ -52,18 +55,18 @@ public class BankSzamla {
         this.trTortenet.add(peldany);
     }
     
-    public void tulajdonosHozzaad(String nev, BankSzamla szamla) {
+    public void tulajdonosHozzaad(String nev) {
         System.out.println("Tulajdonos hozzáad " + nev);        // ellenőrzés miatt
-        if (szamla.getTulajdonosok().size() < MAX_TULAJDONOS) {
-            szamla.getTulajdonosok().add(nev);
+        if (getTulajdonosok().size() < MAX_TULAJDONOS) {
+            getTulajdonosok().add(nev);
         }
     }
     
-    public void tulajdonosTorol(String nev, BankSzamla szamla) {
+    public void tulajdonosTorol(String nev) {
         System.out.println("Tulajdonos töröl " + nev);
-        if (tulajEllenorzes(nev, szamla)) {
-            int i = szamla.getTulajdonosok().indexOf(nev);
-            szamla.getTulajdonosok().remove(i);
+        if (tulajEllenorzes(nev, this)) {
+            int i = getTulajdonosok().indexOf(nev);
+            getTulajdonosok().remove(i);
         }
     }
 
@@ -83,7 +86,7 @@ public class BankSzamla {
     public void osszKoltseg(BankSzamla szamla){
         int eredmeny = 0;
         for (int i = 0; i < szamla.trTortenet.size(); i++) {
-            eredmeny += szamla.trTortenet.get(i).getKoltseg(trTortenet.get(i));
+            eredmeny += szamla.trTortenet.get(i).getKoltseg();
             }
         System.out.println("Az összes tranzakció költsége: " + eredmeny + " Ft");
     }    
