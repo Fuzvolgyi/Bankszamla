@@ -11,10 +11,10 @@
  */
 package bank_0303;
 
-import logika.BankSzamla;
-import logika.HufAtutalas;
-import logika.Tranzakcio2;
-import logika.tipus;
+import Szamla.BankSzamla;
+import Tranzakcio.HufAtutalas;
+import Tranzakcio.Megbizas;
+import Tranzakcio.tipus;
 
 /**
  *
@@ -34,23 +34,24 @@ public class Bank_0303 {
         System.out.println("");
         
         HufAtutalas megbizas = new HufAtutalas("Béla", 100);
-        megbizas.utalasIndit(szamla1);
+        System.out.println(megbizas);
+        megbizas.utalasIndit(megbizas, szamla1);
         
         System.out.println(szamla1);
         
         // betét ellenőrzés
-//        Tranzakcio2.betet(szamla1, 150, "Béla");
+//        Megbizas.betet(szamla1, 150, "Béla");
 //
-//        Tranzakcio2.betet(szamla1, -150, "Béla");
+//        Megbizas.betet(szamla1, -150, "Béla");
 //
-//        Tranzakcio2.betet(szamla1, 70, "Juli");
+//        Megbizas.betet(szamla1, 70, "Juli");
 //
 //        // kivét ellenőrzés
-//        Tranzakcio2.kivet(szamla1, 50, "Bela");
+//        Megbizas.kivet(szamla1, 50, "Bela");
 //
-//        Tranzakcio2.kivet(szamla1, 50, "Béla");
+//        Megbizas.kivet(szamla1, 50, "Béla");
 //
-//        Tranzakcio2.kivet(szamla1, -50, "Béla");
+//        Megbizas.kivet(szamla1, -50, "Béla");
 //
 //        // Tulajdonoskezelés ellenőrzés
 //        szamla1.tulajdonosHozzaad("Géza");
@@ -61,7 +62,7 @@ public class Bank_0303 {
 //        System.out.println(szamla1);
 //        System.out.println("");
 //        
-//        Tranzakcio2.betet(szamla1, 70, "Juli");
+//        Megbizas.betet(szamla1, 70, "Juli");
 //
 //        szamla1.tulajdonosTorol("Géza");
 //        System.out.println(szamla1);
@@ -71,15 +72,15 @@ public class Bank_0303 {
 //        System.out.println(szamla1);
 //        System.out.println("");
 //        
-//        Tranzakcio2.betet(szamla1, 70, "Juli");
+//        Megbizas.betet(szamla1, 70, "Juli");
 //
 //        szamla1.tulajdonosTorol("Béla");
 //        System.out.println(szamla1);
 //
-//        szamla1.trTortenetKiir(szamla1);
-//        
-//        System.out.println("");
-//
+        szamla1.trTortenetKiir(szamla1);
+        
+        System.out.println("");
+
 //        szamla1.osszKoltseg(szamla1);
         
         

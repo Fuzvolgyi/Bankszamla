@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logika;
+package Tranzakcio;
+
+import Szamla.BankSzamla;
 
 /**
  *
  * @author FZs
  */
-public class HufAtutalas extends Tranzakcio2 {
+public class HufAtutalas extends Megbizas implements Tranzakcio{
 
     private tipus tipus; 
     private double tranzakciosDij = 0.05;
@@ -17,39 +19,38 @@ public class HufAtutalas extends Tranzakcio2 {
     private int koltseg;
     
     
-    public HufAtutalas(String inditoSzemely, int osszeg) {
+    public HufAtutalas(String inditoSzemely, int osszeg) {                      // megbízás példánya
         super(inditoSzemely, osszeg);
         this.tipus = tipus.HUF_ATUTALAS;
         this.koltseg = getKoltseg(osszeg);
         this.illetek = getIlletek(osszeg);
-        
     }
 
-    public void utalasIndit(BankSzamla szamla) {
-        if (szamla.getTulajdonosok().contains(this.getInditoSzemely())) {
+    public void utalasIndit(HufAtutalas megbizas, BankSzamla szamla) {          //megbízás metodusa
+        if (szamla.tulajEllenorzes(this.getInditoSzemely(), szamla)) {
             if (this.getOsszeg() > 0) {
-                utal(this);
+                egyenlegNovekszik(megbizas, szamla);
+                szamla.addTortenet(megbizas);
             } else {
                 System.out.println("Nullánál nagyobb összegel lehet tranzakciót indítani");
             }
         }else{
             System.out.println("Csak számlatulajdonos indíthat tranzakciót");
         }
+    }
+    
+    public void egyenlegNovekszik(HufAtutalas megbizas, BankSzamla szamla) {
+        System.out.println("Utal ");
+        szamla.setEgyenleg(szamla.getEgyenleg() + megbizas.getOsszeg() - megbizas.koltseg);
         
     }
     
-    private void utal(HufAtutalas megbizas){
-        System.out.println("Utal " + megbizas);
-        System.out.println("");
-    
-    }
-    
-    public int getKoltseg(int osszeg) {
-        double szam = osszeg * tranzakciosDij;
+    private int getKoltseg(int osszeg) {
+        double szam = osszeg * tranzakciosDij + getIlletek(osszeg);
         return (int)szam;
     }
 
-    public double getIlletek(int osszeg) {
+    private double getIlletek(int osszeg) {
         double szam = osszeg * illetek;
         return  szam;
     }

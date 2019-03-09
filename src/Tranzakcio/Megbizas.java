@@ -1,9 +1,9 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logika;
+package Tranzakcio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,23 +12,28 @@ import java.util.ArrayList;
  *
  * @author FZs
  */
-public abstract class Tranzakcio2 {
+public abstract class Megbizas implements Tranzakcio{
 
     
     private int id = 0;
     private String inditoSzemely;
     private int osszeg;
-//    private LocalDate inditas;
 
-    public Tranzakcio2(String inditoSzemely, int osszeg) {
-        this.id = getId();
-        this.inditoSzemely = inditoSzemely;
-        this.osszeg = osszeg;
-        
-        
+    @Override
+    public void egyenlegNovekszik() {
+    }
+
+    @Override
+    public void egyenlegCsokkent() {
     }
     
-    public int getId() {
+    public Megbizas(String inditoSzemely, int osszeg) {
+        this.id = setId();
+        this.inditoSzemely = inditoSzemely;
+        this.osszeg = osszeg;
+    }
+    
+    private int setId() {
         id++;  
         return id;
     }

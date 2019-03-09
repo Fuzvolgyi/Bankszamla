@@ -9,8 +9,9 @@
  Tranzakció nem történhet addig amíg legalább egy személy nincs rendelve a számlához. 
  Lehessen személyt visszavonni is, a neve alapján de csak akkor ha több van, azaz az utolsót ne engedje törölni.
  */
-package logika;
+package Szamla;
 
+import Tranzakcio.Megbizas;
 import java.util.ArrayList;
 
 public class BankSzamla {
@@ -18,7 +19,7 @@ public class BankSzamla {
     private final int MAX_TULAJDONOS = 3;
     private ArrayList<String> tulajdonosLista;
     private int egyenleg;
-    private ArrayList<Tranzakcio2> trTortenet;
+    private ArrayList<Megbizas> trTortenet;
 
     public BankSzamla(String tulajdonos) {
         tulajdonosLista = new ArrayList<>();
@@ -42,37 +43,28 @@ public class BankSzamla {
         this.egyenleg = egyenleg;
     }
     
-    public ArrayList<Tranzakcio2> getTortenet() {
+    public ArrayList<Megbizas> getTortenet() {
         return trTortenet;
     }
 //</editor-fold>
 
-    public void addTortenet(Tranzakcio2 peldany) {
+    public void addTortenet(Megbizas peldany) {
         this.trTortenet.add(peldany);
     }
     
-    public void tulajdonosHozzaad(String nev) {
+    public void tulajdonosHozzaad(String nev, BankSzamla szamla) {
         System.out.println("Tulajdonos hozzáad " + nev);        // ellenőrzés miatt
-        if (tulajdonosLista.size() < MAX_TULAJDONOS) {
-            tulajdonosLista.add(nev);
+        if (szamla.getTulajdonosok().size() < MAX_TULAJDONOS) {
+            szamla.getTulajdonosok().add(nev);
         }
     }
-
-    public void tulajdonosTorol(String nev) {
-        System.out.println("Tulajdonos töröl " + nev);          // ellenőrzés miatt
-        if (tulajdonosLista.contains(nev)
-                && tulajdonosLista.size() > 1) {
-            boolean talalat = false;
-            int i = 0;
-            while (!talalat || i < tulajdonosLista.size()) {
-                if (tulajdonosLista.get(i).equals(nev)) {
-                    tulajdonosLista.remove(i);
-                    talalat = true;
-                }
-                i++;
-            }
+    
+    public void tulajdonosTorol(String nev, BankSzamla szamla) {
+        System.out.println("Tulajdonos töröl " + nev);
+        if (tulajEllenorzes(nev, szamla)) {
+            int i = szamla.getTulajdonosok().indexOf(nev);
+            szamla.getTulajdonosok().remove(i);
         }
-
     }
 
     @Override
@@ -95,4 +87,9 @@ public class BankSzamla {
             }
         System.out.println("Az összes tranzakció költsége: " + eredmeny + " Ft");
     }    
+
+        
+    public boolean tulajEllenorzes(String nev, BankSzamla szamla ) {
+        return (szamla.getTulajdonosok().contains(nev) && szamla.getTulajdonosok().size() >= 1);
+    }
 }

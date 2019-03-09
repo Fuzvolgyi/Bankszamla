@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logika;
+package Tranzakcio;
+
+import Szamla.BankSzamla;
 
 /**
  *
  * @author FZs
  */
-public class Jovairas extends Tranzakcio2 {
+public class Jovairas extends Megbizas {
 
-    public Jovairas(BankSzamla szamla, logika.tipus tipus, String inditoNev, int osszeg) {
+    public Jovairas(BankSzamla szamla, Trazakcio.tipus tipus, String inditoNev, int osszeg) {
         super(szamla, tipus, inditoNev, osszeg);
     }
     
@@ -21,7 +23,7 @@ public class Jovairas extends Tranzakcio2 {
                 + ", Indító neve: " + nev);                                                 // ellenőrzés miatt
         if (szamla.getTulajdonosok().contains(nev)) {
             if (osszeg > 0) {
-                Tranzakcio2 tr = new Tranzakcio2(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
+                Megbizas tr = new Megbizas(szamla, tipus.HUF_ATUTALAS, nev, osszeg);
                 szamla.addTortenet(tr);
                 System.out.println(tr);                                                     // ellenőrzés miatt
                 szamla.setEgyenleg(tr.ujEgyenleg);
