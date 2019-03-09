@@ -73,12 +73,7 @@ public class Bank_0303 {
         szamla1.osszKoltseg(szamla1);
     }
 
-    private static void megbizasInditas(String nev, int szam, tipus tipus) {
-        Megbizas megbizas = new Megbizas(nev, szam, tipus);
-        System.out.println(megbizas);
-    }
-
-    private static void teszt(String nev, int szam, tipus tipus, BankSzamla szamla1) {
+        private static void teszt(String nev, int szam, tipus tipus, BankSzamla szamla1) {
         Megbizas megbizas = new Megbizas("Béla", szam, tipus);
         System.out.println(megbizas);
         Tranzakcio tr = new Tranzakcio();
