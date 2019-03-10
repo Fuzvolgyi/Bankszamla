@@ -64,7 +64,7 @@ public class BankSzamla {
     
     public void tulajdonosTorol(String nev) {
         System.out.println("Tulajdonos töröl " + nev);
-        if (tulajEllenorzes(nev, this)) {
+        if (tulajEllenorzes(nev)) {
             int i = getTulajdonosok().indexOf(nev);
             getTulajdonosok().remove(i);
         }
@@ -75,24 +75,24 @@ public class BankSzamla {
         return "BankSzamla{" + "tulajdonosok=" + tulajdonosLista + ", egyenleg=" + egyenleg + '}';
     }
 
-    public void trTortenetKiir(BankSzamla szamla){
+    public void trTortenetKiir(){
         System.out.println("");
         System.out.println("A bankszámla összes tranzakció listája:");
-        for (int i = 0; i < szamla.trTortenet.size(); i++) {
-            System.out.println(szamla.trTortenet.get(i));
+        for (int i = 0; i < trTortenet.size(); i++) {
+            System.out.println(trTortenet.get(i));
         }
     }
     
-    public void osszKoltseg(BankSzamla szamla){
+    public void osszKoltseg(){
         int eredmeny = 0;
-        for (int i = 0; i < szamla.trTortenet.size(); i++) {
-            eredmeny += szamla.trTortenet.get(i).getKoltseg();
+        for (int i = 0; i < trTortenet.size(); i++) {
+            eredmeny += trTortenet.get(i).getKoltseg();
             }
         System.out.println("Az összes tranzakció költsége: " + eredmeny + " Ft");
     }    
 
         
-    public boolean tulajEllenorzes(String nev, BankSzamla szamla ) {
-        return (szamla.getTulajdonosok().contains(nev) && szamla.getTulajdonosok().size() >= 1);
+    public boolean tulajEllenorzes(String nev) {
+        return (getTulajdonosok().size() > 1 && getTulajdonosok().contains(nev));
     }
 }

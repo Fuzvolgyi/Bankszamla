@@ -5,9 +5,7 @@
  */
 package Megbizas;
 
-import Szamla.BankSzamla;
 import Tranzakcio.tipus;
-import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Megbizas {
 
-    private int id = 0;
+    private int id = 1;
     private tipus tipus;
     private String inditoSzemely;
     private int osszeg;
@@ -25,12 +23,12 @@ public class Megbizas {
     private boolean inditva = false;
 
     public Megbizas(String inditoSzemely, int osszeg, tipus tipus) {
-        this.id = setId();
+        this.id = beallaitId();
         this.tipus = tipus;
         this.inditoSzemely = inditoSzemely;
         this.osszeg = osszeg;
-        this.koltseg = koltsegSzamitas(osszeg);
-        this.illetek = getIlletek(osszeg);
+        this.koltseg = koltsegSzamitas();
+        this.illetek = getIlletek();
         this.inditva = inditva;
     }
 
@@ -42,16 +40,15 @@ public class Megbizas {
         this.inditva = inditva;
     }
 
-    private int setId() {
-        id++;
-        return id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getKoltseg() {
         return koltseg;
     }
 
-    private double getIlletek(int osszeg) {
+    private double getIlletek() {
         double szam = osszeg * illetek;
         return szam;
     }
@@ -65,20 +62,20 @@ public class Megbizas {
     }
 
     public void setOsszeg(int osszeg) {
-        if (osszeg < 1) {
-            System.err.println("Csak 0-nál nagyob összegre lehet megbízást indítani!");
-        }
         this.osszeg = osszeg;
     }
 
-    
-    
     public tipus getTipus() {
         return tipus;
     }
 
-    private int koltsegSzamitas(int osszeg) {
-        double szam = osszeg * tranzakciosDij + getIlletek(osszeg);
+    private int beallaitId() {                                                  // to do
+       int eredmeny = id;
+       return eredmeny;
+    }
+    
+    private int koltsegSzamitas() {
+        double szam = osszeg * tranzakciosDij + getIlletek();
         return (int) szam;
     }
     
@@ -89,5 +86,7 @@ public class Megbizas {
                 + ", tranzakciosDij=" + tranzakciosDij + ", illetek=" + illetek
                 + ", koltseg=" + koltseg + ", megbízás indítva=" + inditva + '}';
     }
+
+    
 
 }

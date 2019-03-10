@@ -14,39 +14,50 @@ import Szamla.BankSzamla;
  */
 public class Tranzakcio {
 
-    public Tranzakcio() {
+    private final Megbizas MEGBIZAS;
+    private final BankSzamla SZAMLA;
+    
+    public Tranzakcio(Megbizas megbizasPeldany, BankSzamla bankSzamla) {
+        MEGBIZAS = megbizasPeldany;
+        SZAMLA = bankSzamla;
     }
     
-    public void tranzakcioIndit(Megbizas megbizas, BankSzamla szamla) {
-        if (tulajEllenorzes(megbizas.getInditoSzemely(), szamla)) {
-            if (megbizas.getTipus() == tipus.HUF_ATUTALAS) {
-                hufAtutalas(megbizas, szamla);
+    public void tranzakcioIndit() {
+        if (tulajEllenorzes()) {
+            if (MEGBIZAS.getTipus() == tipus.HUF_ATUTALAS) {
+                hufAtutalas();
+            }else {
+                jovairas();
             }
-            if (megbizas.getTipus() == tipus.JOVAIRAS) {
-                jovairas(megbizas, szamla);
-            }
-            megbizas.setInditva(true);
-            szamla.addTortenet(megbizas);
+            MEGBIZAS.setInditva(true);
+            SZAMLA.addTortenet(MEGBIZAS);
         } else {
             System.err.println("Csak a tulajdonos indithat tranzakciót!");
         }
     }
 
-    private boolean tulajEllenorzes(String nev, BankSzamla szamla) {
-        return (szamla.getTulajdonosok().contains(nev) && szamla.getTulajdonosok().size() >= 1);
+    private boolean tulajEllenorzes() {
+        return (SZAMLA.getTulajdonosok().size() >= 1 
+                && SZAMLA.getTulajdonosok().contains(MEGBIZAS.getInditoSzemely()));
     }
 
-    private void hufAtutalas(Megbizas megbizas, BankSzamla szamla) {
+    private void hufAtutalas() {
         System.out.println("hufAtutalas ");
-        int ujEgyenleg = szamla.getEgyenleg() + megbizas.getOsszeg() - megbizas.getKoltseg();
-        szamla.setEgyenleg(ujEgyenleg);
+        int ujEgyenleg = SZAMLA.getEgyenleg() + MEGBIZAS.getOsszeg() - MEGBIZAS.getKoltseg();
+        SZAMLA.setEgyenleg(ujEgyenleg);
     }
 
-    private void jovairas(Megbizas megbizas, BankSzamla szamla){
+    private void jovairas(){
         System.out.println("jovairas ");
-        int ujEgyenleg = szamla.getEgyenleg() - megbizas.getOsszeg() - megbizas.getKoltseg();
-        szamla.setEgyenleg(ujEgyenleg);
+        int ujEgyenleg = SZAMLA.getEgyenleg() - MEGBIZAS.getOsszeg() - MEGBIZAS.getKoltseg();
+        SZAMLA.setEgyenleg(ujEgyenleg);
     }
+
+    @Override
+    public String toString() {
+        return "Tranzakcio{" + "megbizas=" + MEGBIZAS + ", szamla=" + SZAMLA + '}';
+    }
+
     
     
 }

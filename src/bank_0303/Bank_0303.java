@@ -28,19 +28,14 @@ public class Bank_0303 {
     public static void main(String[] args) {
 
         // Teszt
-               
-        
         BankSzamla szamla1 = new BankSzamla("Béla");
 
         System.out.println("Alaphelyzet: " + szamla1);
         System.out.println("");
 
         teszt("Béla", 100, tipus.HUF_ATUTALAS, szamla1);
-        
+
         teszt("Béla", 50, tipus.JOVAIRAS, szamla1);
-        
-
-
 
         // Tulajdonoskezelés ellenőrzés
         szamla1.tulajdonosHozzaad("Géza");
@@ -50,8 +45,6 @@ public class Bank_0303 {
         szamla1.tulajdonosHozzaad("Juli");
         System.out.println(szamla1);
         System.out.println("");
-        
-        
 
         szamla1.tulajdonosTorol("Géza");
         System.out.println(szamla1);
@@ -60,24 +53,22 @@ public class Bank_0303 {
         szamla1.tulajdonosTorol("Juli");
         System.out.println(szamla1);
         System.out.println("");
-        
-        
 
         szamla1.tulajdonosTorol("Béla");
         System.out.println(szamla1);
 
-        szamla1.trTortenetKiir(szamla1);
+        szamla1.trTortenetKiir();
 
         System.out.println("");
 
-        szamla1.osszKoltseg(szamla1);
+        szamla1.osszKoltseg();
     }
 
-        private static void teszt(String nev, int szam, tipus tipus, BankSzamla szamla1) {
+    private static void teszt(String nev, int szam, tipus tipus, BankSzamla szamla1) {
         Megbizas megbizas = new Megbizas("Béla", szam, tipus);
         System.out.println(megbizas);
-        Tranzakcio tr = new Tranzakcio();
-        tr.tranzakcioIndit(megbizas, szamla1);
+        Tranzakcio tr = new Tranzakcio(megbizas, szamla1);
+        tr.tranzakcioIndit();
         System.out.println(megbizas);
         System.out.println(szamla1);
         System.out.println("");
