@@ -16,41 +16,42 @@ public class Tranzakcio {
 
     private final Megbizas MEGBIZAS;
     private final BankSzamla SZAMLA;
-    
+
     public Tranzakcio(Megbizas megbizasPeldany, BankSzamla bankSzamla) {
         MEGBIZAS = megbizasPeldany;
         SZAMLA = bankSzamla;
     }
-    
+
     public void tranzakcioIndit() {
-        if (tulajEllenorzes()) {
+
+        if (SZAMLA.tulajEllenorzes(MEGBIZAS.getInditoSzemely())) {
             if (MEGBIZAS.getTipus() == tipus.HUF_ATUTALAS) {
                 hufAtutalas();
-            }else {
+            } else {
                 jovairas();
             }
-            MEGBIZAS.setInditva(true);
-            SZAMLA.addTortenet(MEGBIZAS);
-        } else {
-            System.err.println("Csak a tulajdonos indithat tranzakciót!");
         }
-    }
-
-    private boolean tulajEllenorzes() {
-        return (SZAMLA.getTulajdonosok().size() >= 1 
-                && SZAMLA.getTulajdonosok().contains(MEGBIZAS.getInditoSzemely()));
     }
 
     private void hufAtutalas() {
         System.out.println("hufAtutalas ");
         int ujEgyenleg = SZAMLA.getEgyenleg() + MEGBIZAS.getOsszeg() - MEGBIZAS.getKoltseg();
         SZAMLA.setEgyenleg(ujEgyenleg);
+        MEGBIZAS.setInditva(true);
+        SZAMLA.addTortenet(MEGBIZAS);
     }
 
-    private void jovairas(){
-        System.out.println("jovairas ");
+    private void jovairas() {
         int ujEgyenleg = SZAMLA.getEgyenleg() - MEGBIZAS.getOsszeg() - MEGBIZAS.getKoltseg();
-        SZAMLA.setEgyenleg(ujEgyenleg);
+        if (ujEgyenleg > 0) {
+            System.out.println("jovairas ");
+            SZAMLA.setEgyenleg(ujEgyenleg);
+            MEGBIZAS.setInditva(true);
+            SZAMLA.addTortenet(MEGBIZAS);
+        } 
+        
+        
+        
     }
 
     @Override
@@ -58,6 +59,4 @@ public class Tranzakcio {
         return "Tranzakcio{" + "megbizas=" + MEGBIZAS + ", szamla=" + SZAMLA + '}';
     }
 
-    
-    
 }

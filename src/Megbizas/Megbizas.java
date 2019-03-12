@@ -13,7 +13,6 @@ import Tranzakcio.tipus;
  */
 public class Megbizas {
 
-    private int id = 1;
     private tipus tipus;
     private String inditoSzemely;
     private int osszeg;
@@ -23,7 +22,6 @@ public class Megbizas {
     private boolean inditva = false;
 
     public Megbizas(String inditoSzemely, int osszeg, tipus tipus) {
-        this.id = beallaitId();
         this.tipus = tipus;
         this.inditoSzemely = inditoSzemely;
         this.osszeg = osszeg;
@@ -38,10 +36,6 @@ public class Megbizas {
 
     public void setInditva(boolean inditva) {
         this.inditva = inditva;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getKoltseg() {
@@ -69,24 +63,17 @@ public class Megbizas {
         return tipus;
     }
 
-    private int beallaitId() {                                                  // to do
-       int eredmeny = id;
-       return eredmeny;
-    }
-    
     private int koltsegSzamitas() {
         double szam = osszeg * tranzakciosDij + getIlletek();
         return (int) szam;
     }
-    
+
     @Override
     public String toString() {
-        return "Megbizas{" + "id=" + id + ", tipus=" + tipus
+        return "Megbizas{tipus=" + tipus
                 + ", inditoSzemely=" + inditoSzemely + ", osszeg=" + osszeg
                 + ", tranzakciosDij=" + tranzakciosDij + ", illetek=" + illetek
                 + ", koltseg=" + koltseg + ", megbízás indítva=" + inditva + '}';
     }
-
-    
 
 }

@@ -26,12 +26,9 @@ public class BankSzamla {
         this.tulajdonosLista.add(tulajdonos);
         this.egyenleg = 0;
         trTortenet = new ArrayList<>();
-
     }
-
+    
     //<editor-fold defaultstate="collapsed" desc="Getter-Setter">
-    
-    
     
     public ArrayList<String> getTulajdonosok() {
         return tulajdonosLista;
@@ -47,21 +44,22 @@ public class BankSzamla {
     }
     
     public ArrayList<Megbizas> getTortenet() {
-        return trTortenet;
+        return (ArrayList<Megbizas>) trTortenet.clone();
     }
 //</editor-fold>
 
+
     public void addTortenet(Megbizas peldany) {
-        this.trTortenet.add(peldany);
+        trTortenet.add(peldany);
     }
-    
+
     public void tulajdonosHozzaad(String nev) {
-        System.out.println("Tulajdonos hozzáad " + nev);        // ellenőrzés miatt
+        System.out.println("Tulajdonos hozzáad " + nev);
         if (getTulajdonosok().size() < MAX_TULAJDONOS) {
             getTulajdonosok().add(nev);
         }
     }
-    
+
     public void tulajdonosTorol(String nev) {
         System.out.println("Tulajdonos töröl " + nev);
         if (tulajEllenorzes(nev)) {
@@ -75,24 +73,23 @@ public class BankSzamla {
         return "BankSzamla{" + "tulajdonosok=" + tulajdonosLista + ", egyenleg=" + egyenleg + '}';
     }
 
-    public void trTortenetKiir(){
+    public void trTortenetKiir() {
         System.out.println("");
         System.out.println("A bankszámla összes tranzakció listája:");
         for (int i = 0; i < trTortenet.size(); i++) {
             System.out.println(trTortenet.get(i));
         }
     }
-    
-    public void osszKoltseg(){
+
+    public void osszKoltseg() {
         int eredmeny = 0;
         for (int i = 0; i < trTortenet.size(); i++) {
             eredmeny += trTortenet.get(i).getKoltseg();
-            }
+        }
         System.out.println("Az összes tranzakció költsége: " + eredmeny + " Ft");
-    }    
+    }
 
-        
     public boolean tulajEllenorzes(String nev) {
-        return (getTulajdonosok().size() > 1 && getTulajdonosok().contains(nev));
+        return (getTulajdonosok().size() > 0 && getTulajdonosok().contains(nev));
     }
 }

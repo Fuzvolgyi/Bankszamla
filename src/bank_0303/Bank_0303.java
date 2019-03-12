@@ -37,14 +37,22 @@ public class Bank_0303 {
 
         teszt("Béla", 50, tipus.JOVAIRAS, szamla1);
 
+        teszt("Béla", 50, tipus.JOVAIRAS, szamla1);
+
         // Tulajdonoskezelés ellenőrzés
         szamla1.tulajdonosHozzaad("Géza");
         System.out.println(szamla1);
         System.out.println("");
 
+        teszt("Juli", 150, tipus.HUF_ATUTALAS, szamla1);
+
         szamla1.tulajdonosHozzaad("Juli");
         System.out.println(szamla1);
         System.out.println("");
+
+        teszt("Juli", 110, tipus.JOVAIRAS, szamla1);
+        
+        teszt("Juli", 150, tipus.HUF_ATUTALAS, szamla1);
 
         szamla1.tulajdonosTorol("Géza");
         System.out.println(szamla1);
@@ -65,7 +73,7 @@ public class Bank_0303 {
     }
 
     private static void teszt(String nev, int szam, tipus tipus, BankSzamla szamla1) {
-        Megbizas megbizas = new Megbizas("Béla", szam, tipus);
+        Megbizas megbizas = new Megbizas(nev, szam, tipus);
         System.out.println(megbizas);
         Tranzakcio tr = new Tranzakcio(megbizas, szamla1);
         tr.tranzakcioIndit();
