@@ -11,6 +11,8 @@
  */
 package Bank;
 
+import Clients.Client;
+import Clients.ClientFactory;
 import Transaction.Transaction;
 import Transaction.TransactionFactory;
 import Transaction.TransactionType;
@@ -27,6 +29,12 @@ public class Bank {
         Transaction transaction1 = transactionFactory.getTransaction(TransactionType.CREDITING, 100);
 
         System.out.println(transaction1);
+        
+        ClientFactory clientFactory = new ClientFactory();
+        
+        Client Client1 = clientFactory.getClient("Géza", "Budapest");
+        
+        System.out.println(Client1);
 
     }
 
