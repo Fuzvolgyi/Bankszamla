@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package Tranzakcio;
+package Interface;
 
 /**
  *
  * @author FZs
  */
-public enum tipus {
-    HUF_ATUTALAS,
-    JOVAIRAS
-            
+public interface ITransactions {
+
+    public void transaction();
 }
