@@ -12,11 +12,11 @@ package Clients;
 public class Client {
 
     private String name;
-    private String city;
+    private String motherName;
 
     public Client(String name, String city) {
         this.name = name;
-        this.city = city;
+        this.motherName = city;
     }
 
     public String getName() {
@@ -24,12 +24,12 @@ public class Client {
     }
 
     public String getCity() {
-        return city;
+        return motherName;
     }
 
     @Override
     public String toString() {
-        return "Client{" + "name=" + name + ", city=" + city + '}';
+        return "Client{" + "name=" + name + ", motherName=" + motherName + '}';
     }
 
 }

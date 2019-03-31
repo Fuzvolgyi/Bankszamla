@@ -13,6 +13,7 @@ class Crediting extends Transaction {
 
     private final double rateOfCostCrediting = 0.03;
     private final double rateOfDutyCrediting = 0.003;
+    private final TransactionType TYPE = TransactionType.CREDITING;
 
     public Crediting(int amount) {
         super(amount);
@@ -20,6 +21,7 @@ class Crediting extends Transaction {
         this.rateOfDuty = rateOfDutyCrediting;
         this.cost = setCost();
         this.duty = setDuty();
+        this.type = TYPE;
     }
 
     @Override

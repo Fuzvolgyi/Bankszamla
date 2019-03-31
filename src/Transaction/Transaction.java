@@ -18,6 +18,7 @@ public abstract class Transaction implements ITransactions {
     protected final int AMOUNT;
     protected final String DATE;
 
+    protected TransactionType type;
     protected double cost;
     protected double duty;
     protected double rateOfCost;
@@ -48,6 +49,10 @@ public abstract class Transaction implements ITransactions {
     public double getDuty() {
         double result = duty;
         return result;
+    }
+
+    public TransactionType getType() {
+        return type;
     }
 
     protected double setCost() {

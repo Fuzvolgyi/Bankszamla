@@ -13,6 +13,7 @@ class HufTransfer extends Transaction {
 
     private final double rateOfCostHufTransfer = 0;
     private final double rateOfDutyHufTransfer = 0.003;
+    private final TransactionType TYPE = TransactionType.HUF_TRANSFER;
 
     public HufTransfer(int amount) {
         super(amount);
@@ -20,6 +21,7 @@ class HufTransfer extends Transaction {
         this.rateOfDuty = rateOfDutyHufTransfer;
         this.cost = setCost();
         this.duty = setDuty();
+        this.type = TYPE;
     }
 
     @Override

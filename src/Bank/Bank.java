@@ -32,7 +32,7 @@ public class Bank {
         
         ClientFactory clientFactory = new ClientFactory();
         
-        Client Client1 = clientFactory.getClient("Géza", "Budapest");
+        Client Client1 = clientFactory.getClient("Géza", "Gizi");
         
         System.out.println(Client1);
 
