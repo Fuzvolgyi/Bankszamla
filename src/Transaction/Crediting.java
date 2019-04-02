@@ -5,6 +5,8 @@
  */
 package Transaction;
 
+import Clients.Client;
+
 /**
  *
  * @author FZs
@@ -15,12 +17,13 @@ class Crediting extends Transaction {
     private final double rateOfDutyCrediting = 0.003;
     private final TransactionType TYPE = TransactionType.CREDITING;
 
-    public Crediting(int amount) {
-        super(amount);
+    Crediting(int amount, Client client) {
+        super(amount, client);
         this.rateOfCost = rateOfCostCrediting;
         this.rateOfDuty = rateOfDutyCrediting;
         this.cost = setCost();
         this.duty = setDuty();
+        this.allDeduction = this.cost + this.duty;
         this.type = TYPE;
     }
 

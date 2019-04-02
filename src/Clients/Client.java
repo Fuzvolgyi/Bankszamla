@@ -14,7 +14,7 @@ public class Client {
     private String name;
     private String motherName;
 
-    public Client(String name, String city) {
+    Client(String name, String city) {
         this.name = name;
         this.motherName = city;
     }
@@ -23,7 +23,7 @@ public class Client {
         return name;
     }
 
-    public String getCity() {
+    public String getMotherName() {
         return motherName;
     }
 

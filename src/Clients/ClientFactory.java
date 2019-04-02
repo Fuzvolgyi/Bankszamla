@@ -6,13 +6,17 @@
 
 package Clients;
 
+import ItemLists.ClientList;
+
 /**
  *
  * @author FZs
  */
 public class ClientFactory {
-    public Client getClient(String name, String city){
-        return new Client(name, city);
+    public Client getClient(String name, String motherName){
+        Client result = new Client(name, motherName);
+        ClientList.addClient(result);
+        return result;
     }
     
 }

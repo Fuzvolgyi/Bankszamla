@@ -6,14 +6,16 @@
 
 package Interface;
 
+import BankAccount.BankAccount;
 import Clients.Client;
-import Transaction.Transaction;
 
 /**
  *
  * @author FZs
  */
-public interface TransactionItem {
-    public Client client();
-    public Transaction transction();
+public interface IBankAccount {
+    
+    public BankAccount getBankAccount(Client client);
+    public void showAccount(BankAccount item);
+    
 }

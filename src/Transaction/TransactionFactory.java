@@ -5,20 +5,31 @@
  */
 package Transaction;
 
+import BankAccount.BankAccount;
+import Clients.Client;
+import ItemLists.TransactionItemList;
+
 /**
  *
  * @author FZs
  */
 public class TransactionFactory {
 
-    public Transaction getTransaction(TransactionType type, int amount) {
+    public Transaction getTransaction(TransactionType type, int amount, Client client) {
+        Transaction result = null;
         switch (type) {
             case CREDITING:
-                return new Crediting(amount);
+                result = new Crediting(amount, client);
+                TransactionItemList.addTransactionItem(result);
+                result.setCondition(TransactionCondition.STARTED);
+                return result;
             case HUF_TRANSFER:
-                return new HufTransfer(amount);
+                result = new HufTransfer(amount, client);
+                TransactionItemList.addTransactionItem(result);
+                result.setCondition(TransactionCondition.STARTED);
+                return result;
             default:
-                return null;
+                return result;
         }
     }
 }

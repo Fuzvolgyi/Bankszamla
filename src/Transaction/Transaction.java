@@ -5,6 +5,7 @@
  */
 package Transaction;
 
+import Clients.Client;
 import Interface.ITransactions;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,19 +16,22 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Transaction implements ITransactions {
 
+    protected final Client client;
     protected final int AMOUNT;
     protected final String DATE;
 
     protected TransactionType type;
     protected double cost;
     protected double duty;
+    protected double allDeduction;
     protected double rateOfCost;
     protected double rateOfDuty;
-//    private Owner entrusting;
+    protected TransactionCondition condition;
 
-    public Transaction(int amount) {
+    public Transaction(int amount, Client client) {
         this.DATE = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.AMOUNT = amount;
+        this.client = client;
 
     }
 
@@ -55,6 +59,18 @@ public abstract class Transaction implements ITransactions {
         return type;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public TransactionCondition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(TransactionCondition condition) {
+        this.condition = condition;
+    }
+    
     protected double setCost() {
         return AMOUNT * rateOfCost;
     }
@@ -63,9 +79,16 @@ public abstract class Transaction implements ITransactions {
         return AMOUNT * rateOfDuty;
     }
 
-    @Override
-    public String toString() {
-        return "Transaction{" + "AMOUNT=" + AMOUNT + ", COST=" + cost + ", DUTY=" + duty + ", DATE=" + DATE + '}';
+    public double getAllDeduction() {
+        return allDeduction;
     }
 
+    @Override
+    public String toString() {
+        return "Transaction {condition= " + condition + " client=" + client 
+                + ", AMOUNT=" + AMOUNT + ", DATE=" + DATE + ", type=" + type 
+                + ", cost=" + cost + ", duty=" + duty + ", allDeduction=" + allDeduction + '}';
+    }
+
+        
 }

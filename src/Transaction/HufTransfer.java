@@ -5,6 +5,8 @@
  */
 package Transaction;
 
+import Clients.Client;
+
 /**
  *
  * @author FZs
@@ -14,13 +16,16 @@ class HufTransfer extends Transaction {
     private final double rateOfCostHufTransfer = 0;
     private final double rateOfDutyHufTransfer = 0.003;
     private final TransactionType TYPE = TransactionType.HUF_TRANSFER;
+    
 
-    public HufTransfer(int amount) {
-        super(amount);
+
+    HufTransfer(int amount, Client client) {
+        super(amount, client);
         this.rateOfCost = rateOfCostHufTransfer;
         this.rateOfDuty = rateOfDutyHufTransfer;
         this.cost = setCost();
         this.duty = setDuty();
+        this.allDeduction = this.cost + this.duty + this.AMOUNT;
         this.type = TYPE;
     }
 
@@ -31,7 +36,7 @@ class HufTransfer extends Transaction {
 
     @Override
     public String toString() {
-        return "HufTransfer" + super.toString();
+        return "HufTransfer " + super.toString();
     }
 
 }
